@@ -4,36 +4,6 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 import plotly.express as px
 
-import streamlit_authenticator as stauth
-import yaml
-from streamlit_authenticator.utilities.hasher import Hasher
-from yaml.loader import SafeLoader
-
-# Load the configuration file
-with open('config.yaml') as file:
-    config = yaml.load(file, Loader=SafeLoader)
-
-# Initialize the authenticator
-authenticator = stauth.Authenticate(
-    config['credentials'],
-    config['cookie']['name'],
-    config['cookie']['key'],
-    config['cookie']['expiry_days'],
-    config['preauthorized']
-)
-
-# Update the login method call with the fields parameter
-fields = {
-    'username': 'Username',
-    'password': 'Password'
-}
-
-name, authentication_status, username =authenticator.login('main', fields = {'Form name': 'custom_form_name'})
-
-if authentication_status:
-    st.title("First App")
-
-    # Sidebar for file upload
     dataset = st.sidebar.file_uploader("DataSet", type='.csv')
 
     if dataset is not None:
@@ -63,12 +33,4 @@ if authentication_status:
     else:
         st.warning("Upload your dataset.")
 
-    # Logout button
-    authenticator.logout("Logout", 'main', key='unique_key')
-
-elif authentication_status == False:
-    st.error("Username/password is incorrect")
-
-elif authentication_status == None:
-    st.warning("Please enter your username and password")
 
