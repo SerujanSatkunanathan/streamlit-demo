@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 import plotly.express as px
 
+st.title("ML APP")
     dataset = st.sidebar.file_uploader("DataSet", type='.csv')
 
     if dataset is not None:
