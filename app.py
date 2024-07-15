@@ -5,9 +5,8 @@ from sklearn.linear_model import LinearRegression
 import plotly.express as px
 
 st.title("ML APP")
-    dataset = st.sidebar.file_uploader("DataSet", type='csv')
-
-    if dataset is not None:
+dataset = st.sidebar.file_uploader("DataSet", type='csv')
+if dataset is not None:
         data = pd.read_csv(dataset)
         x = data['Hours']
         y = data['Scores']
@@ -30,8 +29,7 @@ st.title("ML APP")
 
         mse = mean_absolute_error(y_test, pred)
         st.info(f"Mean absolute value {mse}")
-
-    else:
+else:
         st.warning("Upload your dataset.")
 
 
